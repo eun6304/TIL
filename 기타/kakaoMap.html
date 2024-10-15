@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>카카오맵 광주광역시에 숫자 표시</title>
+    <style>
+      .label {margin-bottom: 96px;}
+      .label * {display: inline-block;vertical-align: top;}
+      .label .left {
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;
+        display: inline-block;
+        height: 24px;
+        overflow: hidden;
+        vertical-align: top;
+        width: 7px;
+      }
+      .label .center {
+        background: url(https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;
+        display: inline-block;
+        height: 24px;
+        font-size: 12px;
+        line-height: 24px;
+      }
+      .label .right {
+        background: url("https://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;
+        display: inline-block;
+        height: 24px;
+        overflow: hidden;
+        width: 6px;
+      }
+      </style>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f51fb3e36a08c71e20de8132e6c756cc"></script>
+</head>
+<body>
+<div id="map" style="width:300px;height:500px;"></div>
+
+<script>
+    // 지도 초기화
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(35.1595454, 126.8526012), // 광주광역시의 위도, 경도
+            level: 13,// // 지도 레벨
+            mapTypeId: kakao.maps.MapTypeId.ROADMAP 
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치
+    var markerPosition  = new kakao.maps.LatLng(35.1595454, 126.8526012); 
+
+    // 마커를 생성
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정
+    marker.setMap(map);
+
+    // 숫자 0.5를 표시할 인포윈도우 내용
+    var content = '<div class ="label"><span class="left"></span><span class="center">카카오!</span><span class="right"></span></div>';
+
+    // 커스텀 오버레이를 생성합니다
+    var customOverlay = new kakao.maps.CustomOverlay({
+      position: markerPosition,
+      content: content   
+    });
+
+    // 커스텀 오버레이를 지도에 표시합니다
+    customOverlay.setMap(map);
+
+</script>
+
+</body>
+</html>
